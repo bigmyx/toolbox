@@ -1,0 +1,11 @@
+[auth.anonymous]
+enabled = true
+org_role = Editor
+
+[database]
+# Either "mysql", "postgres" or "sqlite3", it's your choice
+type = mysql
+host = <%= @db_host %>
+name = grafana
+user = grafana
+password = <%= @db_pass %>
