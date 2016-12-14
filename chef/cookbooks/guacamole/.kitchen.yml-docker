@@ -1,0 +1,30 @@
+---
+driver:
+  name: docker
+  binary: docker
+  use_sudo: false
+
+provisioner:
+  name: chef_solo
+  coobooks_path:
+    - cookbooks
+  encrypted_data_bag_secret_key_path: "../../encrypted_data_bag_secret"
+  data_bags_path: "../../data_bags"
+
+  ohai:
+    disabled_plugins: ["passwd"]
+
+platforms:
+  - name: ubuntu
+    driver_config:
+      privileged: true
+      memory: 2048m
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      provision_command:
+        - echo "root:password" | chpasswd
+        - sed -i 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers
+suites:
+  - name: default
+    run_list:
+      - recipe[guacamole]
