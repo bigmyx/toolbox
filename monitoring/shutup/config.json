@@ -1,0 +1,6 @@
+{
+  "cassandra": [{
+      "name": "job",
+      "value":".*cassandra_nodes.*",
+      "isRegex": true}]
+}
