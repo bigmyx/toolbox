@@ -21,7 +21,6 @@ def cli():
 @click.option("--endpoint", required=True, help="ingress name for alertmanager")
 def create_silence(endpoint, duration):
     api = f"https://{endpoint}/alertmanager/api/v1/silences"
-    # import pdb; pdb.set_trace()
     utc_offset_sec = time.altzone if time.localtime().tm_isdst else time.timezone
     utc_offset = timedelta(seconds=-utc_offset_sec)
 
